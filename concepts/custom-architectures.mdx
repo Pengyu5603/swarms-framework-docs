@@ -160,8 +160,8 @@ class CustomSwarm:
         """
         for i, agent in enumerate(self.agents):
             # Check for required run method
-            if not hasattr(agent, 'run'):
-                raise AgentValidationError(f"Agent at index {i} does not have a 'run' method.")
+            if not callable(getattr(agent, 'run', None)):
+                raise AgentValidationError(f"Agent at index {i} must have a callable 'run' method.")
 
             # Check for agent_name attribute
             if not hasattr(agent, 'agent_name'):
